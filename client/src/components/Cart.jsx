@@ -11,8 +11,10 @@ export default function Cart() {
       {cartItems.length === 0 ? (
         <p>Twój koszyk jest pusty.</p>
       ) : (
-        cartItems.map((item, index) => (
-          <div key={index}>{item.name} - {item.price} zł</div>
+        cartItems.map((item) => (
+          <div key={item.id || item.name}>
+            {item.name} - {item.price} zł
+          </div>
         ))
       )}
       <br />
