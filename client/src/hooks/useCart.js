@@ -1,4 +1,4 @@
-import { useState, useContext, createContext } from "react";
+import { useState, useContext, useMemo, createContext } from "react";
 import PropTypes from "prop-types";
 
 // Tworzymy kontekst koszyka
@@ -8,8 +8,11 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
+  // Zapamiętujemy value, żeby nie zmieniało się przy każdym renderze
+  const value = useMemo(() => ({ cartItems, setCartItems }), [cartItems, setCartItems]);
+
   return (
-    <CartContext.Provider value={{ cartItems, setCartItems }}>
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );
